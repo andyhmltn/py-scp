@@ -28,7 +28,7 @@ CONFIG = {
 def fetch_version(print_version_string=True):
   VERSION = {
     'MAJOR':0,
-    'MINOR':4,
+    'MINOR':5,
     'PATCH':0
   }
 
@@ -58,13 +58,13 @@ def install_pyscp(CONFIG):
 # Main PySCP Script
 #
 ########################
-def run_pyscp(arguments):
+def run_pyscp(arguments, scp_flags=[]):
   from_path = os.path.join(os.getcwd(), arguments[1])
   to_path   = arguments[2]
 
   custom_filename = None
 
-  if arguments[3] is not None:
+  if 3 in arguments:
     custom_filename = arguments[3]
 
   from_directory = os.path.dirname(from_path)
@@ -80,11 +80,12 @@ def run_pyscp(arguments):
     os.system(format_scp_string(from_path, to_path, directory_mapping['directory_mapping']['all'][from_directory]))
   else:
     if remote_host in directory_mapping['directory_mapping']:
-      os.system(format_scp_string(from_path, to_path, directory_mapping['directory_mapping'][remote_host][from_directory], custom_filename))
+      os.system(format_scp_string(from_path, to_path, directory_mapping['directory_mapping'][remote_host][from_directory], scp_flags, custom_filename))
     else:
+      print remote_host
       print "There are no rules setup for that host"
 
-def format_scp_string(from_path,to_path,remote_path,custom_filename=None):
+def format_scp_string(from_path,to_path,remote_path,scp_flags,custom_filename=None):
   # Add a trailing slash to the remote path
   if remote_path[-1] != '/':
     remote_path = remote_path + '/'
@@ -94,7 +95,11 @@ def format_scp_string(from_path,to_path,remote_path,custom_filename=None):
   if custom_filename is not None:
     path = path + custom_filename
 
+  for flag in scp_flags:
+    path += ' '+flag
+
   return path
+
 ########################
 #
 # Handle PySCP Arguments
@@ -106,10 +111,22 @@ flags = {
   '--init':install_pyscp
 }
 
-if len(sys.argv) > 1:
-  if sys.argv[1] in flags:
-    flags[sys.argv[1]](CONFIG)
+scp_flags = []
 
-  if len(sys.argv) > 2:
-    run_pyscp(sys.argv)
+arguments = sys.argv
+
+if len(sys.argv) > 1:
+  for key in arguments:
+    if key in flags:
+      flags[key](CONFIG)
+
+  for key,value in enumerate(arguments):
+      if value[0] == '-': #Assume it's a flag
+        if value not in flags:
+          scp_flags.append(value)
+
+        del arguments[key]
+
+  if len(arguments) > 2:
+    run_pyscp(arguments, scp_flags)
 
