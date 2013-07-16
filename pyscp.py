@@ -25,15 +25,15 @@ CONFIG = {
 # Version function
 #
 ########################
-def fetch_version(return_version_string=True):
+def fetch_version(print_version_string=True):
   VERSION = {
     'MAJOR':0,
-    'MINOR':3,
+    'MINOR':4,
     'PATCH':0
   }
 
-  if return_version_string:
-    return "PySCP Version: " + str(VERSION['MAJOR'])+'.'+str(VERSION['MINOR'])+'.'+str(VERSION['PATCH'])
+  if print_version_string:
+    print "PySCP Version: " + str(VERSION['MAJOR'])+'.'+str(VERSION['MINOR'])+'.'+str(VERSION['PATCH'])
   else:
     return VERSION
 
@@ -100,13 +100,15 @@ def format_scp_string(from_path,to_path,remote_path,custom_filename=None):
 # Handle PySCP Arguments
 #
 ########################
+
+flags = {
+  '-v':fetch_version, 
+  '--init':install_pyscp
+}
+
 if len(sys.argv) > 1:
-
-  if sys.argv[1] == '--init':
-    install_pyscp(CONFIG)  
-
-  elif sys.argv[1] == '-v':
-    print fetch_version()
+  if sys.argv[1] in flags:
+    flags[sys.argv[1]](CONFIG)
 
   if len(sys.argv) > 2:
     run_pyscp(sys.argv)
