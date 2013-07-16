@@ -22,8 +22,7 @@ To get started using PySCP, you will need to create the folder mapping. To do th
 
 Then simply run pyscp in a similar way to how you would use the default `scp` command.  and run using `pyscp /path/to/local/directory/file.txt user@123.4.5.6`. This will scp `file.txt` to `/path/to/remote/directory` on the remote server (in this case: 123.4.5.6.)
 
-**This feature is currently under development and therefore isn't available in this version**
-If you wish to upload `file.txt` under a different name, you can do so by adding a hash to the end of the previous command. If you wanted `file.txt` to be renamed to `file_remote.txt` for example, you can use: `pyscp /path/to/local/directory/file.txt user@123.4.5.6#file_remote.txt`
+If you wish to upload `file.txt` under a different name, you can do so by adding an extra argument to the end of the previous command. If you wanted `file.txt` to be renamed to `file_remote.txt` for example, you can use: `pyscp /path/to/local/directory/file.txt user@123.4.5.6 file_remote.txt`
 
 Voila!
 

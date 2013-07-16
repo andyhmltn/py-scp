@@ -62,6 +62,11 @@ def run_pyscp(arguments):
   from_path = os.path.join(os.getcwd(), arguments[1])
   to_path   = arguments[2]
 
+  custom_filename = None
+
+  if arguments[3] is not None:
+    custom_filename = arguments[3]
+
   from_directory = os.path.dirname(from_path)
 
   directory_mapping_file = open(CONFIG['path']+CONFIG['config_file'])
@@ -75,13 +80,21 @@ def run_pyscp(arguments):
     os.system(format_scp_string(from_path, to_path, directory_mapping['directory_mapping']['all'][from_directory]))
   else:
     if remote_host in directory_mapping['directory_mapping']:
-      os.system(format_scp_string(from_path, to_path, directory_mapping['directory_mapping'][remote_host][from_directory]))
+      os.system(format_scp_string(from_path, to_path, directory_mapping['directory_mapping'][remote_host][from_directory], custom_filename))
     else:
       print "There are no rules setup for that host"
 
-def format_scp_string(from_path,to_path,replace):
-  return "scp " + from_path + " " + to_path + ":" + replace
+def format_scp_string(from_path,to_path,remote_path,custom_filename=None):
+  # Add a trailing slash to the remote path
+  if remote_path[-1] != '/':
+    remote_path = remote_path + '/'
 
+  path = "scp " + from_path + " " + to_path + ":" + remote_path
+  
+  if custom_filename is not None:
+    path = path + custom_filename
+
+  return path
 ########################
 #
 # Handle PySCP Arguments
