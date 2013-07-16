@@ -59,7 +59,7 @@ def install_pyscp(CONFIG):
 #
 ########################
 def run_pyscp(arguments):
-  from_path = arguments[1]
+  from_path = os.path.join(os.getcwd(), arguments[1])
   to_path   = arguments[2]
 
   from_directory = os.path.dirname(from_path)
