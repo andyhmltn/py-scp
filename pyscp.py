@@ -28,7 +28,7 @@ CONFIG = {
 def fetch_version(return_version_string=True):
   VERSION = {
     'MAJOR':0,
-    'MINOR':1,
+    'MINOR':3,
     'PATCH':0
   }
 
