@@ -25,15 +25,25 @@ CONFIG = {
 # Version function
 #
 ########################
+def join_dict(dictionary, string='.', use_value=True):
+  list_to_join = []
+
+  for key,value in dictionary.items():
+    value_to_add = value if use_value else key
+
+    list_to_join.append(str(value))
+
+  return string.join(list_to_join)
+
 def fetch_version(print_version_string=True):
   VERSION = {
     'MAJOR':0,
     'MINOR':5,
-    'PATCH':0
+    'PATCH':1
   }
 
   if print_version_string:
-    print "PySCP Version: " + str(VERSION['MAJOR'])+'.'+str(VERSION['MINOR'])+'.'+str(VERSION['PATCH'])
+    print "PySCP Version: "+join_dict(VERSION)
   else:
     return VERSION
 
