@@ -39,7 +39,7 @@ def fetch_version(print_version_string=True):
   VERSION = {
     'MAJOR':0,
     'MINOR':5,
-    'PATCH':1
+    'PATCH':2
   }
 
   if print_version_string:
@@ -61,7 +61,7 @@ def install_pyscp(CONFIG):
 
     print "PySCP has been installed succesfully"
   else:
-    print "PySCP is already installed! Edit ~/.pyscp/config.json to begin"
+    print "PySCP is already installed! Edit "+CONFIG['path']+CONFIG['config_file']+" to begin"
 
 ########################
 #

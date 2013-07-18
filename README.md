@@ -28,7 +28,7 @@ Voila!
 
 Current Version
 ----------------
-PySCP is currently on version: `0.5.1`. To see the version of your current installation, you can run `pyscp -v`
+PySCP is currently on version: `0.5.2`. To see the version of your current installation, you can run `pyscp -v`
 
 LICENSE
 ----------------
