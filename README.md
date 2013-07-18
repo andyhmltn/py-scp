@@ -7,7 +7,7 @@ Do you use SCP a lot? Is your development environment layout different to wherev
 
 Getting Started
 -----------------
-To get started using PySCP, you will need to create the folder mapping. To do this, run `pyscp --init`. This will create a directory in your home folder called `.pyscp` that contains the main configuration file `config.json`. Simply edit it to your needs. For example:
+To get started using PySCP, you will need to create the folder mapping. To do this, run `pyscp --init`. This will create a directory in your config folder (`.config`) called `pyscp` that contains the main configuration file `config.json`. Simply edit it to your needs. For example:
 
 	{
 		"directory-mapping":{
@@ -28,7 +28,7 @@ Voila!
 
 Current Version
 ----------------
-PySCP is currently on version: `0.5.2`. To see the version of your current installation, you can run `pyscp -v`
+PySCP is currently on version: `0.6.0`. To see the version of your current installation, you can run `pyscp -v`
 
 LICENSE
 ----------------

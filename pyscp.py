@@ -11,7 +11,7 @@ import json
 ########################
 HOME   = os.path.expanduser("~")+'/'
 CONFIG = {
-  'path'        : HOME+'.pyscp/',
+  'path'        : HOME+'.config/pyscp/',
   'config_file' : 'config.json',
   'template':{
     'directory_mapping':{
@@ -38,8 +38,8 @@ def join_dict(dictionary, string='.', use_value=True):
 def fetch_version(print_version_string=True):
   VERSION = {
     'MAJOR':0,
-    'MINOR':5,
-    'PATCH':2
+    'MINOR':6,
+    'PATCH':0
   }
 
   if print_version_string:
